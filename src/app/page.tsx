@@ -1,3 +1,9 @@
+import Input from '../Base/input'
+
 export default function Home() {
-    return <div>123</div>
+    return (
+        <div>
+            <Input />
+        </div>
+    )
 }
