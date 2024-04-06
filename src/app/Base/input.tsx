@@ -21,7 +21,7 @@ export default function Input({
         onChange && onChange(e.target.value)
     }
     return (
-        <div className="flex items-center">
+        <div className="flex items-center m-2">
             <div className="block p-2 text-sm font-medium leading-6 text-gray-900">
                 {label}
             </div>
