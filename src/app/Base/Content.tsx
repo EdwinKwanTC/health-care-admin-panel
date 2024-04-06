@@ -1,9 +1,17 @@
 import Button from '@/app/Base/Button'
+import { Shift } from '@/route/shift'
+import dayjs from 'dayjs'
 
-const Content = () => {
+type Props = {
+    shift: Shift
+}
+
+const Content = ({ shift }: Props) => {
     return (
         <div className="text-xs">
-            <div className="bg-gray-100 p-1">some date</div>
+            <div className="bg-gray-100 p-1">
+                {dayjs(shift.startedAt).format('DD MMMM')}
+            </div>
 
             <div className="flex items-center">
                 <div className="p-2">
@@ -16,9 +24,15 @@ const Content = () => {
                     />
                 </div>
                 <div>
-                    <div className="p-1">some time</div>
-                    <div className="p-1">some name</div>
-                    <div className="p-1">something else</div>
+                    <div className="p-1">
+                        {dayjs(shift.startedAt).format('hh:mma')}-
+                        {dayjs(shift.endedAt).format('hh:mma')}
+                    </div>
+                    <div className="p-1">
+                        {shift.userId} - {shift.lastName} {shift.firstName}{' '}
+                        {shift.chiName}
+                    </div>
+                    <div className="p-1">{shift.role}</div>
                     <Button buttonType="decline" />
                     <Button buttonType="confirm" />
                 </div>
