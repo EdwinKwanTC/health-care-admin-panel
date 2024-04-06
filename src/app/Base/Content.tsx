@@ -1,3 +1,5 @@
+import Button from '@/app/Base/Button'
+
 const Content = () => {
     return (
         <div className="text-xs">
@@ -17,6 +19,8 @@ const Content = () => {
                     <div className="p-1">some time</div>
                     <div className="p-1">some name</div>
                     <div className="p-1">something else</div>
+                    <Button buttonType="decline" />
+                    <Button buttonType="confirm" />
                 </div>
             </div>
         </div>
