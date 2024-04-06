@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <div>
             <Input label="Caregiver Name" />
-            <div className="p-2 flex flex-wrap sm:flex-nowrap">
+            <div className="flex flex-wrap sm:flex-nowrap">
                 {shiftsByMonths &&
                     sortedMonth.map((key, index) => (
                         <Card key={index} title={key}>
