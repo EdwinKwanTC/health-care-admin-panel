@@ -33,8 +33,19 @@ const Content = ({ shift }: Props) => {
                         {shift.chiName}
                     </div>
                     <div className="p-1">{shift.role}</div>
-                    <Button buttonType="decline" />
-                    <Button buttonType="confirm" />
+                    {shift.status === 'PENDING' && (
+                        <>
+                            <Button buttonType="decline" />
+                            <Button buttonType="confirm" />
+                        </>
+                    )}
+                    {shift.status === 'CONFIRMED' && (
+                        <Button buttonType="confirm" disabled />
+                    )}
+
+                    {shift.status === 'DECLINED' && (
+                        <Button buttonType="decline" disabled />
+                    )}
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ export default function Home() {
 
     return (
         <div>
-            <Input label="This is a label" />
+            <Input label="Caregiver Name" />
             <div className="p-2 flex flex-wrap sm:flex-nowrap">
                 {shiftsByMonths &&
                     sortedMonth.map((key, index) => (
