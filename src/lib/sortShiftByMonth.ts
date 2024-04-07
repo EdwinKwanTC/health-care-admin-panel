@@ -1,4 +1,4 @@
-import { Shift } from '@/route/shift'
+import { Shift } from '@/router/shift'
 import dayjs from 'dayjs'
 
 const months = [

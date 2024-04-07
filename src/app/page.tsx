@@ -4,8 +4,8 @@ import Input from '@/app/Base/input'
 import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { getShift, resetShifts, updateShift } from '@/route/shift'
-import { useMemo, useState } from 'react'
+import { getShift, resetShifts, updateShift } from '@/router/shift'
+import { useEffect, useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
 import useDebounce from '@/hooks/useDebounce'
@@ -15,7 +15,10 @@ export default function Home() {
     const debounceSearch = useDebounce(searchCareGiver, 500)
     const [multiConfirm, setMultiConfirm] = useState<number[]>([])
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        console.log(multiConfirm)
+    }, [multiConfirm])
+
     const handleUpdateMultiConfirm = (value: number) => {
         const tempArray = [...multiConfirm]
         if (tempArray.includes(value)) {

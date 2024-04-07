@@ -1,5 +1,5 @@
 import Button from '@/app/Base/Button'
-import { Shift } from '@/route/shift'
+import { Shift } from '@/router/shift'
 import dayjs from 'dayjs'
 import Checkbox from '@/app/Base/checkbox'
 

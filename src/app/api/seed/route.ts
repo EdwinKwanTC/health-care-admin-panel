@@ -1,4 +1,4 @@
-import { Shift } from '@/route/shift'
+import { Shift } from '@/router/shift'
 import shiftJSON from '@/app/api/shift/data.json'
 import { db } from '@/db'
 import { shift } from '@/db/schema'
