@@ -5,12 +5,12 @@ import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getShift, resetShifts, updateShift } from '@/route/shift'
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
 import useDebounce from '@/hooks/useDebounce'
 
-export default function Home(callback: T, deps: React.DependencyList) {
+export default function Home() {
     const [searchCareGiver, setSearchCareGiver] = useState('')
     const debounceSearch = useDebounce(searchCareGiver, 500)
     const [multiConfirm, setMultiConfirm] = useState<number[]>([])
