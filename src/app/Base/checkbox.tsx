@@ -5,11 +5,13 @@ type Props = {
     checked?: boolean
     onClick?: () => void
     className?: string
+    disabled?: boolean
 }
 
-const BaseCheckbox = ({ checked, onClick, className }: Props) => {
+const BaseCheckbox = ({ checked, onClick, className, disabled }: Props) => {
     return (
         <Checkbox
+            disabled={disabled}
             checked={checked}
             onClick={onClick}
             className={className ? className : ''}

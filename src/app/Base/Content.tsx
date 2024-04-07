@@ -25,6 +25,7 @@ const Content = ({
             <div className="flex items-center">
                 <div className="p-2">
                     <Checkbox
+                        disabled={shift.status !== 'PENDING'}
                         onClick={selectCheckBox}
                         className="data-[state=checked]:bg-green-600"
                     />
