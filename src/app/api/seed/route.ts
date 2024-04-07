@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
     const shiftData: Shift[] = JSON.parse(JSON.stringify(shiftJSON))
 
-    const deleteShift = await db.delete(shift).then(async () => {
+    await db.delete(shift).then(async () => {
         console.log('seeding data')
         try {
             for (const item of shiftData) {

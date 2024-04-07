@@ -5,14 +5,26 @@ import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getShift, resetShifts, updateShift } from '@/route/shift'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
 import useDebounce from '@/hooks/useDebounce'
 
-export default function Home() {
+export default function Home(callback: T, deps: React.DependencyList) {
     const [searchCareGiver, setSearchCareGiver] = useState('')
     const debounceSearch = useDebounce(searchCareGiver, 500)
+    const [multiConfirm, setMultiConfirm] = useState<number[]>([])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleUpdateMultiConfirm = (value: number) => {
+        const tempArray = [...multiConfirm]
+        if (tempArray.includes(value)) {
+            tempArray.splice(tempArray.indexOf(value), 1)
+        } else {
+            tempArray.push(value)
+        }
+        setMultiConfirm(tempArray)
+    }
 
     const shiftData = useQuery({
         queryKey: ['shiftData', debounceSearch],
@@ -69,6 +81,9 @@ export default function Home() {
                                 <Content
                                     shift={shift}
                                     key={monthKey}
+                                    selectCheckBox={() =>
+                                        handleUpdateMultiConfirm(shift.id)
+                                    }
                                     confirmShift={() =>
                                         updateShiftMutation.mutate({
                                             id: shift.id,
