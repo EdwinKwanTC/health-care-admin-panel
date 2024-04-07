@@ -11,9 +11,11 @@ const declineDisabledStyle =
     'rounded bg-rose-200 px-3 text-sm font-semibold text-white shadow-sm text-red-600 disabled:opacity-100'
 
 type Props = {
+    label?: string
     buttonType?: 'confirm' | 'decline'
     disabled?: boolean
     onClick?: () => void
+    customStyle?: string
 }
 
 const buttonStyle = (type: 'confirm' | 'decline', disabled: boolean) => {
@@ -35,17 +37,19 @@ const buttonStyle = (type: 'confirm' | 'decline', disabled: boolean) => {
 import { Button } from '@/components/ui/button'
 
 const BaseButton = ({
+    label,
     buttonType = 'confirm',
     disabled = false,
     onClick,
+    customStyle,
 }: Props) => {
     return (
         <Button
             disabled={disabled}
             onClick={onClick}
-            className={`m-2 h-8 ${buttonStyle(buttonType, disabled)}`}
+            className={`m-2 h-8 ${customStyle ? customStyle : buttonStyle(buttonType, disabled)}`}
         >
-            {buttonType === 'confirm' ? 'confirm' : 'decline'}
+            {label ? label : buttonType === 'confirm' ? 'confirm' : 'decline'}
         </Button>
     )
 }

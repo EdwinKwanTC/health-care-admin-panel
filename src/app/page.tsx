@@ -3,15 +3,26 @@
 import Input from '@/app/Base/input'
 import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
-import { useQuery } from '@tanstack/react-query'
-import { getShift } from '@/route/shift'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { getShift, resetShifts, updateShift } from '@/route/shift'
 import { useMemo } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
+import Button from '@/app/Base/Button'
 
 export default function Home() {
     const shiftData = useQuery({
         queryKey: ['shiftData'],
         queryFn: getShift,
+    })
+
+    const updateShiftMutation = useMutation({
+        mutationFn: updateShift,
+        onSuccess: () => shiftData.refetch(),
+    })
+
+    const resetShiftMutation = useMutation({
+        mutationFn: resetShifts,
+        onSuccess: () => shiftData.refetch(),
     })
 
     const shiftsByMonths = useMemo(() => {
@@ -32,13 +43,34 @@ export default function Home() {
 
     return (
         <div>
-            <Input label="Caregiver Name" />
+            <div className="flex justify-between">
+                <Input label="Caregiver Name" />
+                <Button
+                    label="reset"
+                    onClick={() => resetShiftMutation.mutate()}
+                />
+            </div>
             <div className="flex flex-wrap sm:flex-nowrap">
                 {shiftsByMonths &&
                     sortedMonth.map((key, index) => (
                         <Card key={index} title={key}>
                             {shiftsByMonths[key].map((shift, monthKey) => (
-                                <Content shift={shift} key={monthKey} />
+                                <Content
+                                    shift={shift}
+                                    key={monthKey}
+                                    confirmShift={() =>
+                                        updateShiftMutation.mutate({
+                                            id: shift.id,
+                                            status: 'CONFIRMED',
+                                        })
+                                    }
+                                    declineShift={() =>
+                                        updateShiftMutation.mutate({
+                                            id: shift.id,
+                                            status: 'DECLINED',
+                                        })
+                                    }
+                                />
                             ))}
                         </Card>
                     ))}

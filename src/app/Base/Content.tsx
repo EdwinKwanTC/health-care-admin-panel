@@ -4,9 +4,11 @@ import dayjs from 'dayjs'
 
 type Props = {
     shift: Shift
+    confirmShift?: () => void
+    declineShift?: () => void
 }
 
-const Content = ({ shift }: Props) => {
+const Content = ({ shift, confirmShift, declineShift }: Props) => {
     return (
         <div className="text-xs">
             <div className="bg-gray-100 p-1">
@@ -35,8 +37,14 @@ const Content = ({ shift }: Props) => {
                     <div className="p-1">{shift.role}</div>
                     {shift.status === 'PENDING' && (
                         <>
-                            <Button buttonType="decline" />
-                            <Button buttonType="confirm" />
+                            <Button
+                                buttonType="decline"
+                                onClick={declineShift}
+                            />
+                            <Button
+                                buttonType="confirm"
+                                onClick={confirmShift}
+                            />
                         </>
                     )}
                     {shift.status === 'CONFIRMED' && (
