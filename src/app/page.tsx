@@ -10,7 +10,7 @@ import {
     updateShift,
     updateShifts,
 } from '@/router/shift'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
 import useDebounce from '@/hooks/useDebounce'
