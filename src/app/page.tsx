@@ -74,7 +74,11 @@ export default function Home() {
     }, [shiftsByMonths])
 
     if (resetShiftMutation.isPending) {
-        return <div>Resetting Data... Please wait</div>
+        return (
+            <div className="flex justify-center items-center">
+                Resetting Data... Please wait
+            </div>
+        )
     }
 
     return (
