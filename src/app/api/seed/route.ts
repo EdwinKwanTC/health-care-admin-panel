@@ -22,16 +22,20 @@ export async function GET() {
             throw new Error('Could not insert data')
         }
 
+        return 'seed completed'
+    }
+
+    const seedData = await db.delete(shift).then(async () => await seed())
+
+    if (seedData) {
         return NextResponse.json({
             status: 200,
-            data: 'seed success',
+            data: 'seeding completed',
         })
     }
 
-    await db.delete(shift).then(async () => await seed())
-
     return NextResponse.json({
         status: 200,
-        data: 'no seed information',
+        data: 'seeding failed',
     })
 }
