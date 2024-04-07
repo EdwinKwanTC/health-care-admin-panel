@@ -8,6 +8,8 @@ export async function GET() {
     const shiftData: Shift[] = JSON.parse(JSON.stringify(shiftJSON))
 
     const seed = async () => {
+        await db.delete(shift)
+
         console.log('seeding data')
         try {
             for (const item of shiftData) {
@@ -25,7 +27,7 @@ export async function GET() {
         return 'seed completed'
     }
 
-    const seedData = await db.delete(shift).then(async () => await seed())
+    const seedData = await seed()
 
     if (seedData) {
         return NextResponse.json({
