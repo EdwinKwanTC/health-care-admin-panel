@@ -4,7 +4,12 @@ import Input from '@/app/Base/input'
 import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { getShift, resetShifts, updateShift } from '@/router/shift'
+import {
+    getShift,
+    resetShifts,
+    updateShift,
+    updateShifts,
+} from '@/router/shift'
 import { useEffect, useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
@@ -42,6 +47,11 @@ export default function Home() {
         onSuccess: () => shiftData.refetch(),
     })
 
+    const multiShiftUpdateMutation = useMutation({
+        mutationFn: updateShifts,
+        onSuccess: () => shiftData.refetch(),
+    })
+
     const resetShiftMutation = useMutation({
         mutationFn: resetShifts,
         onSuccess: () => shiftData.refetch(),
@@ -71,10 +81,21 @@ export default function Home() {
                     onChange={(value) => setSearchCareGiver(value)}
                     label="Caregiver Name"
                 />
-                <Button
-                    label="reset"
-                    onClick={() => resetShiftMutation.mutate()}
-                />
+                <div>
+                    <Button
+                        label="multi confirm"
+                        onClick={() =>
+                            multiShiftUpdateMutation.mutate({
+                                ids: multiConfirm,
+                            })
+                        }
+                    />
+                    <Button
+                        label="reset"
+                        buttonType="decline"
+                        onClick={() => resetShiftMutation.mutate()}
+                    />
+                </div>
             </div>
             <div className="flex flex-wrap sm:flex-nowrap">
                 {shiftsByMonths &&

@@ -37,7 +37,18 @@ export const updateShift = async ({
         status,
     })
 
-    return 'success'
+    return result.data
+}
+
+type UpdateShiftsParams = {
+    ids: number[]
+}
+
+export const updateShifts = async ({
+    ids,
+}: UpdateShiftsParams): Promise<string> => {
+    const result = await axios.put('/api/shifts', ids)
+    return result.data
 }
 
 export const resetShifts = async (): Promise<void> => {
