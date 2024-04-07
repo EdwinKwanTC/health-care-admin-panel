@@ -7,7 +7,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getShift } from '@/route/shift'
 import { useMemo } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
-import dayjs from 'dayjs'
 
 export default function Home() {
     const shiftData = useQuery({
