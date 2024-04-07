@@ -12,8 +12,15 @@ export type Shift = {
     role: string
 }
 
-export const getShift = async (): Promise<Shift[]> => {
-    const result = await axios.get('/api/shift')
+type GetShiftParams = {
+    search?: string
+}
+
+export const getShift = async ({
+    search = '',
+}: GetShiftParams): Promise<Shift[]> => {
+    console.log('search', search)
+    const result = await axios.get(`/api/shift?search=${search}`)
     return result.data
 }
 

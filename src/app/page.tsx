@@ -5,14 +5,21 @@ import Card from '@/app/Base/Card'
 import Content from '@/app/Base/Content'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getShift, resetShifts, updateShift } from '@/route/shift'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { sortShiftByMonth } from '@/lib/sortShiftByMonth'
 import Button from '@/app/Base/Button'
+import useDebounce from '@/hooks/useDebounce'
 
 export default function Home() {
+    const [searchCareGiver, setSearchCareGiver] = useState('')
+    const debounceSearch = useDebounce(searchCareGiver, 500)
+
     const shiftData = useQuery({
-        queryKey: ['shiftData'],
-        queryFn: getShift,
+        queryKey: ['shiftData', debounceSearch],
+        queryFn: async () =>
+            await getShift({
+                search: debounceSearch,
+            }),
     })
 
     const updateShiftMutation = useMutation({
@@ -44,7 +51,11 @@ export default function Home() {
     return (
         <div>
             <div className="flex justify-between">
-                <Input label="Caregiver Name" />
+                <Input
+                    value={searchCareGiver}
+                    onChange={(value) => setSearchCareGiver(value)}
+                    label="Caregiver Name"
+                />
                 <Button
                     label="reset"
                     onClick={() => resetShiftMutation.mutate()}
