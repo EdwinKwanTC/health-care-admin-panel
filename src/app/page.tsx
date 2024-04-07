@@ -20,10 +20,6 @@ export default function Home() {
     const debounceSearch = useDebounce(searchCareGiver, 500)
     const [multiConfirm, setMultiConfirm] = useState<number[]>([])
 
-    useEffect(() => {
-        console.log(multiConfirm)
-    }, [multiConfirm])
-
     const handleUpdateMultiConfirm = (value: number) => {
         const tempArray = [...multiConfirm]
         if (tempArray.includes(value)) {
