@@ -4,7 +4,7 @@ import { db } from '@/db'
 import { shift } from '@/db/schema'
 import { NextResponse } from 'next/server'
 
-export async function GET() {
+export async function POST() {
     const shiftData: Shift[] = JSON.parse(JSON.stringify(shiftJSON))
 
     const seed = async () => {

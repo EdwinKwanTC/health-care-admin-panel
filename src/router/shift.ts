@@ -52,5 +52,5 @@ export const updateShifts = async ({
 }
 
 export const resetShifts = async (): Promise<void> => {
-    await axios.get('/api/seed')
+    await axios.post('/api/seed')
 }
