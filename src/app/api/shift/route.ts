@@ -5,7 +5,6 @@ import { eq, like, or, sql } from 'drizzle-orm'
 
 export async function GET(request: NextRequest) {
     const search = request.nextUrl.searchParams.get('search')
-    console.log('search', search)
     if (search) {
         const shiftData = await db.query.shift.findMany({
             where: or(

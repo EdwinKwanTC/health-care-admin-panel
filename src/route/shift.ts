@@ -19,7 +19,6 @@ type GetShiftParams = {
 export const getShift = async ({
     search = '',
 }: GetShiftParams): Promise<Shift[]> => {
-    console.log('search', search)
     const result = await axios.get(`/api/shift?search=${search}`)
     return result.data
 }
