@@ -73,6 +73,10 @@ export default function Home() {
         return sortingMonth(Object.keys(shiftsByMonths))
     }, [shiftsByMonths])
 
+    if (resetShiftMutation.isPending) {
+        return <div>Resetting Data... Please wait</div>
+    }
+
     return (
         <div>
             <div className="flex justify-between sticky top-0 bg-white">
