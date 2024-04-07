@@ -21,10 +21,15 @@ export async function GET() {
             console.error(e)
             throw new Error('Could not insert data')
         }
+
+        return NextResponse.json({
+            status: 200,
+            data: 'seed success',
+        })
     })
 
     return NextResponse.json({
         status: 200,
-        data: 'seed success',
+        data: 'no seed information',
     })
 }
