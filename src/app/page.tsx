@@ -50,7 +50,7 @@ export default function Home() {
 
     return (
         <div>
-            <div className="flex justify-between absolute">
+            <div className="flex justify-between sticky top-0 bg-white">
                 <Input
                     value={searchCareGiver}
                     onChange={(value) => setSearchCareGiver(value)}
