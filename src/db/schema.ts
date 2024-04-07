@@ -1,5 +1,5 @@
 import { serial, text, timestamp, pgTable } from 'drizzle-orm/pg-core'
-export const user = pgTable('user', {
+export const shift = pgTable('shift', {
     id: serial('id'),
     userId: serial('userId'),
     chiName: text('chiName'),
